@@ -1,4 +1,6 @@
 package com.passer.littlerpc.core.remoting.transport.netty;
 
-public class NettyRpcServerHandler {
+import io.netty.channel.ChannelInboundHandlerAdapter;
+
+public class NettyRpcServerHandler extends ChannelInboundHandlerAdapter {
 }
