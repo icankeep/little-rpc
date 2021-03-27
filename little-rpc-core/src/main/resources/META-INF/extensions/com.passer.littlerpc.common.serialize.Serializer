@@ -1,0 +1,2 @@
+kyro=com.passer.littlerpc.common.serialize.kyro.KryoSerializer
+protostuff=com.passer.littlerpc.common.serialize.protostuff.ProtostuffSerializer

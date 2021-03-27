@@ -18,3 +18,13 @@
     - 注解配置
     - xml配置
     - 代码配置
+   
+
+FAQ
+1. ClassLoader.loadClass()与Class.forName()
+   
+   Class.forName()加载的类会被初始化，类中的静态成员变量会被初始化，静态代码块会被执行
+   通过ClassLoader.loadClass加载的类不进行解析操作，不进行解析操作就意味着初始化也不会进行，那么其类的静态参数就不会初始化，静态代码块也不会被执行。
+
+2. enum类和普通类区别 （延伸接口和抽象类还有普通类）
+3. Exception Throwable继承体系RuntimeException Error 运行期异常和编译期异常
