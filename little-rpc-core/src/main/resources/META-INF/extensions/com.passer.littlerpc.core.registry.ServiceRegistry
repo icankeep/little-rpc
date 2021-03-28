@@ -1,0 +1,1 @@
+zk=com.passer.littlerpc.core.registry.zk.ZkServiceRegistry

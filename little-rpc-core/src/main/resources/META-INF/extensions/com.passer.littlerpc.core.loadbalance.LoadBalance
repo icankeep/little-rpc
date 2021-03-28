@@ -1,0 +1,1 @@
+random=com.passer.littlerpc.core.loadbalance.impl.RandomLoadBalance

@@ -1,0 +1,2 @@
+netty=com.passer.littlerpc.core.remoting.transport.netty.client.NettyRpcClient
+socket=com.passer.littlerpc.core.remoting.transport.socket.SocketRpcClient
