@@ -9,6 +9,7 @@ import com.passer.littlerpc.common.remoting.dto.RpcRequest;
 import com.passer.littlerpc.common.remoting.dto.RpcResponse;
 import com.passer.littlerpc.common.utils.SingletonFactory;
 import com.passer.littlerpc.core.remoting.handler.RpcRequestHandler;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
@@ -46,13 +47,14 @@ public class NettyRpcServerHandler extends ChannelInboundHandlerAdapter {
                     Object result = requestHandler.handle(request);
                     RpcResponse response;
                     if (ctx.channel().isActive() && ctx.channel().isWritable()) {
-                        response = RpcResponse.success(result, castMsg.getRequestId());
+                        response = RpcResponse.success(result, request.getRequestId());
                     } else {
-                        response = RpcResponse.fail(result, castMsg.getRequestId());
+                        response = RpcResponse.fail(result, request.getRequestId());
                         log.error("Channel is not active or writable, message will be dropped.");
                     }
                     rpcMessage.setData(response);
                 }
+                ctx.channel().writeAndFlush(rpcMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
             }
         } finally {
             ReferenceCountUtil.release(msg);

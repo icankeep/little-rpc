@@ -3,7 +3,6 @@ package com.passer.littlerpc.core.registry.zk;
 import com.esotericsoftware.minlog.Log;
 import com.passer.littlerpc.common.exception.ZkException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.curator.CuratorZookeeperClient;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -25,7 +24,7 @@ public class CuratorUtils {
     private static final int BASE_SLEEP_TIME = 1000;
     private static final int MAX_RETRIES = 3;
     private static final int BLOCK_UNTIL_CONNECTED_TIME = 30;
-    private static final String ZK_ROOT_PATH = "little-rpc";
+    private static final String ZK_ROOT_PATH = "/little-rpc/";
     private static final Set<String> REGISTER_PATH_SET = ConcurrentHashMap.newKeySet();
     private static final Map<String, List<String>> REGISTER_SERVICE_MAP = new ConcurrentHashMap<>();
 
@@ -33,6 +32,10 @@ public class CuratorUtils {
     private static CuratorFramework zkClient;
 
     private CuratorUtils(){}
+
+    public static String getZkRootPath() {
+        return ZK_ROOT_PATH;
+    }
 
     public static CuratorFramework getZkClient() {
         if (zkClient != null && zkClient.getState() == CuratorFrameworkState.STARTED) {
@@ -69,6 +72,10 @@ public class CuratorUtils {
 
     public static void createPersistentNode(String path) {
         createPersistentNode(getZkClient(), path);
+    }
+
+    public static List<String> getChildrenNodes(String path) {
+        return getChildrenNodes(getZkClient(), path);
     }
 
     public static List<String> getChildrenNodes(CuratorFramework zkClient, String path) {

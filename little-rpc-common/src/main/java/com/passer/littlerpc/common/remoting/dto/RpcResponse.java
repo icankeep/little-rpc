@@ -13,12 +13,12 @@ import java.io.Serializable;
 @Setter
 public class RpcResponse<T> implements Serializable {
     private static final long serialVersionUID = -6763018384475687293L;
-    private int requestId;
+    private String requestId;
     private T data;
     private Integer code;
     private String message;
 
-    public static <T> RpcResponse<T> success(T data, int requestId) {
+    public static <T> RpcResponse<T> success(T data, String requestId) {
         RpcResponse<T> rpcResponse = new RpcResponseBuilder<T>()
                 .code(RpcResponseEnum.SUCCESS.getCode())
                 .data(data)
@@ -28,7 +28,7 @@ public class RpcResponse<T> implements Serializable {
         return rpcResponse;
     }
 
-    public static <T> RpcResponse<T> fail(T data, int requestId) {
+    public static <T> RpcResponse<T> fail(T data, String requestId) {
         RpcResponse<T> rpcResponse = new RpcResponseBuilder<T>()
                 .code(RpcResponseEnum.FAIL.getCode())
                 .message(RpcResponseEnum.FAIL.getMessage())

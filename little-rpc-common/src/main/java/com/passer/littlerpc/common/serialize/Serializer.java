@@ -1,5 +1,8 @@
 package com.passer.littlerpc.common.serialize;
 
+import com.passer.littlerpc.common.annotation.SPI;
+
+@SPI
 public interface Serializer {
     /**
      * 将对象序列化成byte数组

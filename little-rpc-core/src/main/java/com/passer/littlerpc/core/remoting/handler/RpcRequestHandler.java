@@ -22,11 +22,11 @@ public class RpcRequestHandler {
     private Object invokeMethod(Object service, RpcRequest request) {
         try {
             Method method = service.getClass().getMethod(request.getMethodName(), request.getParamTypes());
-            Object result = method.invoke(request.getParams());
+            Object result = method.invoke(service, request.getParams());
             log.info("Service[{}] invoke method[{}] successfully.", request.getInterfaceName(), request.getMethodName());
-            return request;
+            return result;
         } catch (Exception e) {
-            throw new RpcException(String.format("Invoke method[{}] error.", request), e);
+            throw new RpcException(String.format("Invoke method[%s] error.", request), e);
         }
     }
 }

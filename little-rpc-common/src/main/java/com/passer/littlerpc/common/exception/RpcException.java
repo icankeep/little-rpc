@@ -1,6 +1,5 @@
 package com.passer.littlerpc.common.exception;
 
-import com.passer.littlerpc.common.constants.MessageTypeEnum;
 import com.passer.littlerpc.common.constants.RpcErrorMessageEnum;
 
 public class RpcException extends RuntimeException {

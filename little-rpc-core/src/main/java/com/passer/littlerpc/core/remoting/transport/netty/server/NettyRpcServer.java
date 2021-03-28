@@ -2,11 +2,11 @@ package com.passer.littlerpc.core.remoting.transport.netty.server;
 
 import com.passer.littlerpc.common.concurrent.ThreadPoolFactoryUtils;
 import com.passer.littlerpc.common.entity.RpcServiceProperty;
+import com.passer.littlerpc.core.remoting.transport.netty.codec.RpcMessageDecoder;
+import com.passer.littlerpc.core.remoting.transport.netty.codec.RpcMessageEncoder;
 import com.passer.littlerpc.common.utils.SingletonFactory;
 import com.passer.littlerpc.core.provider.ServiceProvider;
 import com.passer.littlerpc.core.provider.impl.ServiceProviderImpl;
-import com.passer.littlerpc.core.remoting.transport.netty.codec.RpcMessageDecoder;
-import com.passer.littlerpc.core.remoting.transport.netty.codec.RpcMessageEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -16,10 +16,12 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class NettyRpcServer {
     public static final int PORT = 9998;
     private static final ServiceProvider serviceProvider = SingletonFactory.getInstance(ServiceProviderImpl.class);
@@ -44,7 +46,7 @@ public class NettyRpcServer {
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childOption(ChannelOption.TCP_NODELAY, true)
-                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {

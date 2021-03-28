@@ -1,1 +1,1 @@
-zk=com.passer.littlerpc.core.registry.ZkServiceDiscovery
+zk=com.passer.littlerpc.core.registry.zk.ZkServiceDiscovery

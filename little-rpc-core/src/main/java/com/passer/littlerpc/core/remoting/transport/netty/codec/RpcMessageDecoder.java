@@ -4,10 +4,10 @@ import com.passer.littlerpc.common.constants.MessageTypeEnum;
 import com.passer.littlerpc.common.constants.RpcConstants;
 import com.passer.littlerpc.common.constants.SerializerTypeEnum;
 import com.passer.littlerpc.common.exception.ValidMessageException;
-import com.passer.littlerpc.common.extension.ExtensionLoader;
 import com.passer.littlerpc.common.remoting.dto.RpcMessage;
 import com.passer.littlerpc.common.remoting.dto.RpcRequest;
 import com.passer.littlerpc.common.remoting.dto.RpcResponse;
+import com.passer.littlerpc.common.extension.ExtensionLoader;
 import com.passer.littlerpc.common.serialize.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -89,7 +89,6 @@ public class RpcMessageDecoder extends LengthFieldBasedFrameDecoder {
         byte codec = in.readByte();
         byte compress = in.readByte();
         int requestId = in.readInt();
-        in.readBytes(messageLength);
 
         RpcMessage message = RpcMessage.builder()
                 .messageType(messageType)
@@ -109,6 +108,7 @@ public class RpcMessageDecoder extends LengthFieldBasedFrameDecoder {
         int bodyLength = messageLength - RpcConstants.MESSAGE_HEADER_LENGTH;
         if (bodyLength > 0) {
             byte[] buffer = new byte[bodyLength];
+            in.readBytes(buffer);
             // get codec type for serialize
             String codecName = SerializerTypeEnum.getName(message.getCodec());
             Serializer serializer = ExtensionLoader.getExtensionLoader(Serializer.class).getExtension(codecName);
@@ -118,7 +118,7 @@ public class RpcMessageDecoder extends LengthFieldBasedFrameDecoder {
             }
             if (messageType == MessageTypeEnum.NORMAL_RESPONSE.ordinal()) {
                 RpcResponse response = serializer.deserialize(buffer, RpcResponse.class);
-                response.setData(response);
+                message.setData(response);
             }
         }
         return message;

@@ -1,7 +1,10 @@
 package com.passer.littlerpc.core.registry;
 
+import com.passer.littlerpc.common.annotation.SPI;
+
 import java.net.InetSocketAddress;
 
+@SPI
 public interface ServiceDiscovery {
     /**
      * look up service by service name

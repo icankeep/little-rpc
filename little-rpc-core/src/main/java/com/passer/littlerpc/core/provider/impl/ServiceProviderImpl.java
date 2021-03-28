@@ -3,10 +3,10 @@ package com.passer.littlerpc.core.provider.impl;
 import com.passer.littlerpc.common.constants.RpcErrorMessageEnum;
 import com.passer.littlerpc.common.entity.RpcServiceProperty;
 import com.passer.littlerpc.common.exception.RpcException;
-import com.passer.littlerpc.common.extension.ExtensionLoader;
 import com.passer.littlerpc.core.provider.ServiceProvider;
 import com.passer.littlerpc.core.registry.ServiceRegistry;
 import com.passer.littlerpc.core.remoting.transport.netty.server.NettyRpcServer;
+import com.passer.littlerpc.common.extension.ExtensionLoader;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetAddress;
