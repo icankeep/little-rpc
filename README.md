@@ -28,3 +28,8 @@ FAQ
 
 2. enum类和普通类区别 （延伸接口和抽象类还有普通类）
 3. Exception Throwable继承体系RuntimeException Error 运行期异常和编译期异常
+
+## Todo list
+- [ ] 文档整理
+- [ ] 实现SocketRpcClient和SocketRpcServer
+- [ ] 实现其他注册中心
