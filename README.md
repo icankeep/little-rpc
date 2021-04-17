@@ -5,6 +5,8 @@
     - 使用Zookeeper
         - 负载均衡策略
         - zkClient的配置选择
+   - 使用etcd
+1. SPI扩展
 1. 序列化
     - [使用kyro](https://github.com/EsotericSoftware/kryo)
       - 注册类（如果要部署多台机器，需要显示关闭注册功能）
@@ -33,3 +35,4 @@ FAQ
 - [ ] 文档整理
 - [ ] 实现SocketRpcClient和SocketRpcServer
 - [ ] 实现其他注册中心
+- [ ] 注释整理
